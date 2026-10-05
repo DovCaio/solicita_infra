@@ -1,0 +1,49 @@
+services:
+  frontend:
+    image: dovcaio/solicita-frontend:latest
+    container_name: solicita-frontend
+    restart: unless-stopped
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - solicita-network
+
+  backend:
+    image: dovcaio/solicita-backend:latest
+    container_name: solicita-backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/solicita
+      SPRING_DATASOURCE_USERNAME: solicita
+      SPRING_DATASOURCE_PASSWORD: solicita
+      CORS_ALLOWED_ORIGIN: http://localhost:3000
+    ports:
+      - "8080:8080"
+    networks:
+      - solicita-network
+
+  postgres:
+    image: postgres:17
+    container_name: solicita-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: solicita
+      POSTGRES_USER: solicita
+      POSTGRES_PASSWORD: solicita
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - solicita-network
+
+volumes:
+  postgres_data:
+
+networks:
+  solicita-network:
+    driver: bridge
