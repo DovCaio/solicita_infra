@@ -22,7 +22,6 @@ cd solicita-infra
 docker compose up -d
 ```
 
-```markdown
 ## Arquitetura
 
 A aplicação é composta por três serviços:
@@ -32,4 +31,3 @@ A aplicação é composta por três serviços:
 - **PostgreSQL:** banco de dados utilizado pela aplicação.
 
 As imagens do frontend e backend são publicadas no Docker Hub e consumidas pelo `docker-compose.yml`.
-```
