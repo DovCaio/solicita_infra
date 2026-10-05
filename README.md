@@ -21,3 +21,15 @@ cd solicita-infra
 ```bash
 docker compose up -d
 ```
+
+```markdown
+## Arquitetura
+
+A aplicação é composta por três serviços:
+
+- **Frontend:** aplicação web desenvolvida com Next.js.
+- **Backend:** API REST desenvolvida com Spring Boot.
+- **PostgreSQL:** banco de dados utilizado pela aplicação.
+
+As imagens do frontend e backend são publicadas no Docker Hub e consumidas pelo `docker-compose.yml`.
+```
